@@ -1,10 +1,11 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, Button } from "react-native";
 
-const Account = () => {
+const Account = ({ onLogout }) => {
   return (
     <View>
       <Text>Account</Text>
+      <Button title="Déconnexion" onPress={onLogout} />
     </View>
   );
 };

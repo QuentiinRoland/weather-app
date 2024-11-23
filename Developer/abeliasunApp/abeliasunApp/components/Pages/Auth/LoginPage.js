@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import {
   Text,
@@ -9,8 +10,10 @@ import {
   Button,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginPage = ({ onLogin }) => {
+  const navigation = useNavigation();
   const [inputName, setInputName] = useState("");
   const [inputPassword, setInputPassword] = useState("");
 
@@ -25,7 +28,7 @@ const LoginPage = ({ onLogin }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/LoginPage/abeliasun-logo.png")}
+        source={require("../../../assets/LoginPage/abeliasun-logo.png")}
         style={styles.iconAbeliasun}
       />
       <View style={[styles.flexbox, styles.inputStyle]}>
@@ -44,7 +47,7 @@ const LoginPage = ({ onLogin }) => {
       <View style={[styles.flexbox, styles.inputStyle]}>
         <MaterialCommunityIcons
           name="phone"
-          size="20"
+          size={20}
           style={styles.iconInput}
           color={"#fff"}
         />
@@ -57,7 +60,10 @@ const LoginPage = ({ onLogin }) => {
       </View>
       <View style={styles.flexbox}>
         <Button title="Se connecter" onPress={onLogin} />
-        <Button title="S'inscrire" onPress={() => console.log("")} />
+        <Button
+          title="S'inscrire"
+          onPress={() => navigation.navigate("Register")}
+        />
       </View>
     </View>
   );
