@@ -1,6 +1,6 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Customer from "../Pages/Customer";
+import CustomerNavigation from "./CustomerNavigation";
 import Account from "../Pages/Account";
 import Services from "../Pages/Services";
 import Home from "../Pages/Home";
@@ -26,7 +26,7 @@ const TabNavigator = ({ onLogout }) => {
           ),
         }}
       />
-      <Tab.Screen name="Clients" component={Customer} />
+      <Tab.Screen name="Clients" component={CustomerNavigation} />
       <Tab.Screen name="Services" component={Services} />
       <Tab.Screen
         name="Account"
