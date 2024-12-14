@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
   try {
-    const { name, email, phone } = req.body;
+    const { name, email, phone, street, city, postalCode } = req.body;
     const customer = await Customer.findByPk(req.params.id);
     if (!customer) {
       return res.status(404).json({ error: "Client non trouvé" });
@@ -43,6 +43,9 @@ router.put("/:id", async (req, res) => {
     customer.name = name || customer.name;
     customer.email = email || customer.email;
     customer.phone = phone || customer.phone;
+    customer.street = street || customer.street;
+    customer.city = city || customer.city;
+    customer.postalCode = postalCode || customer.postalCode;
 
     await customer.save();
     res.json(customer);

@@ -1,29 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView } from "react-native";
-import { useState } from "react";
-import AuthNavigator from "./components/Navigation/AuthNavigation";
-import Navigation from "./components/Navigation/Navigation";
+import AuthNavigator from "./components/Navigation/AuthNavigation"; // Auth pour non connectés
+import Navigation from "./components/Navigation/Navigation"; // TabNavigator pour connectés
 
 export default function App() {
-  // État pour vérifier si l'utilisateur est connecté
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // État d'authentification
 
-  // Fonction de connexion
   const handleLogin = () => {
-    setIsLoggedIn(true); // Simule une connexion
+    console.log("App.js : Utilisateur connecté !");
+    setIsLoggedIn(true); // Passe à la navigation principale
   };
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Simule une connexion
+    console.log("App.js : Utilisateur déconnecté !");
+    setIsLoggedIn(false); // Retourne à l'écran de connexion
   };
 
   return (
     <SafeAreaView style={styles.container}>
       {isLoggedIn ? (
-        <Navigation onLogout={handleLogout} />
+        <Navigation onLogout={handleLogout} /> // TabNavigator si connecté
       ) : (
-        <AuthNavigator onLogin={handleLogin} />
+        <AuthNavigator onLogin={handleLogin} /> // AuthNavigator si non connecté
       )}
       <StatusBar style="auto" />
     </SafeAreaView>

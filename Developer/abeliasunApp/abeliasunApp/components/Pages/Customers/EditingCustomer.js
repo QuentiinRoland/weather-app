@@ -1,18 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Alert } from "react-native";
-import { updateCustomer } from "../../../services/api";
+import { updateCustomer } from "../../../services/apiCustomer";
 
 const EditCustomer = ({ route, navigation }) => {
   const { customer } = route.params;
   const [name, setName] = useState(customer.name);
   const [email, setEmail] = useState(customer.email);
   const [phone, setPhone] = useState(customer.phone);
+  const [street, setStreet] = useState(customer.street);
+  const [city, setCity] = useState(customer.city);
+  const [postalCode, setPostalCode] = useState(customer.postalCode);
 
   const handleUpdate = async () => {
     try {
-      await updateCustomer(customer.id, { name, email, phone }); // Envoie les données mises à jour
+      await updateCustomer(customer.id, {
+        name,
+        email,
+        phone,
+        street,
+        city,
+        postalCode,
+      });
       Alert.alert("Succès", "Le client a été modifié avec succès !");
-      navigation.navigate("CustomerListing"); // Retourne à la liste des clients
+      navigation.navigate("CustomerListing");
     } catch (error) {
       console.error("Erreur lors de la mise à jour :", error);
       Alert.alert("Erreur", "Impossible de modifier le client.");
@@ -41,6 +51,27 @@ const EditCustomer = ({ route, navigation }) => {
         onChangeText={(text) => setPhone(text)}
         keyboardType="phone-pad"
       />
+      <TextInput
+        style={styles.input}
+        placeholder="Rue"
+        value={street}
+        onChangeText={(text) => setStreet(text)}
+      />
+      <View style={styles.row}>
+        <TextInput
+          style={[styles.input, styles.cityInput]}
+          placeholder="Ville"
+          value={city}
+          onChangeText={(text) => setCity(text)}
+        />
+        <TextInput
+          style={[styles.input, styles.postalInput]}
+          placeholder="Code postal"
+          value={postalCode}
+          onChangeText={(text) => setPostalCode(text)}
+          keyboardType="numeric"
+        />
+      </View>
       <Button title="Enregistrer les modifications" onPress={handleUpdate} />
     </View>
   );
@@ -58,6 +89,17 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 15,
     borderRadius: 5,
+  },
+  row: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  cityInput: {
+    flex: 1,
+    marginRight: 10,
+  },
+  postalInput: {
+    flex: 1,
   },
 });
 

@@ -1,15 +1,15 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import ListingInvoice from "../Pages/Invoices/InvoicesListing";
+import InvoiceDetails from "../Pages/Invoices/InvoicesDetails";
+import InvoiceForm from "../Pages/Invoices/InvoicesForm";
+// import EditInvoice from "../Pages/Invoices/EditInvoice";
 import { TouchableOpacity, StyleSheet } from "react-native";
-import CustomerListing from "../Pages/Customers/CustomerListing";
-import Customer from "../Pages/Customers/CustomerForm";
-import CustomerDetails from "../Pages/Customers/CustomerDetails";
-import EditCustomer from "../Pages/Customers/EditingCustomer";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Stack = createStackNavigator();
 
-const CustomerNavigation = () => {
+const InvoiceNavigation = () => {
   return (
     <Stack.Navigator
       screenOptions={({ navigation }) => ({
@@ -30,7 +30,7 @@ const CustomerNavigation = () => {
         headerRight: () => (
           <TouchableOpacity
             style={styles.headerRightButton}
-            onPress={() => navigation.navigate("CustomerAdd")}
+            onPress={() => navigation.navigate("InvoiceForm")}
           >
             <MaterialCommunityIcons name="plus" size={24} color="green" />
           </TouchableOpacity>
@@ -50,31 +50,24 @@ const CustomerNavigation = () => {
       })}
     >
       <Stack.Screen
-        name="CustomerListing"
-        component={CustomerListing}
+        name="InvoicesListing"
+        component={ListingInvoice}
         options={{
-          title: "Liste des Clients",
+          title: "Listes des prestations",
         }}
       />
       <Stack.Screen
-        name="CustomerAdd"
-        component={Customer}
+        name="InvoiceForm"
+        component={InvoiceForm}
         options={{
-          title: "Créer un Client",
+          title: "Créer une prestation",
         }}
       />
       <Stack.Screen
-        name="CustomerDetails"
-        component={CustomerDetails}
+        name="InvoiceDetails"
+        component={InvoiceDetails}
         options={{
-          title: "Détails du Client",
-        }}
-      />
-      <Stack.Screen
-        name="EditCustomer"
-        component={EditCustomer}
-        options={{
-          title: "Modifier le Client",
+          title: "Détails de la prestation",
         }}
       />
     </Stack.Navigator>
@@ -95,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomerNavigation;
+export default InvoiceNavigation;

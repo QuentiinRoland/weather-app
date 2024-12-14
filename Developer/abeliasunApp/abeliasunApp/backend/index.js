@@ -6,7 +6,8 @@ const Customer = require("./models/Customer");
 const customerRoutes = require("./routes/customer");
 const employeeRoutes = require("./routes/Employee");
 const servicesRoutes = require("./routes/Services");
-// const saleOrderRoutes = require("./routes/SaleOrder");
+const InvoiceRoutes = require("./routes/Invoice");
+const Invoice = require("./models/Invoice");
 const app = express();
 
 // Middleware
@@ -15,7 +16,7 @@ app.use(bodyParser.json());
 app.use("/api/customers", customerRoutes);
 app.use("/api/employees", employeeRoutes);
 app.use("/api/services", servicesRoutes);
-// app.use("/api/saleOrders", saleOrderRoutes);
+app.use("/api/invoices", InvoiceRoutes);
 
 sequelize
   .authenticate()

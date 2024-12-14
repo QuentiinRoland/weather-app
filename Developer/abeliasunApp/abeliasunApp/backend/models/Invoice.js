@@ -4,7 +4,7 @@ const sequelize = require("../config/database");
 const Customer = require("./Customer");
 const Services = require("./Services");
 
-const SaleOrder = sequelize.define("SaleOrder", {
+const Invoice = sequelize.define("Invoice", {
   date: {
     type: DataTypes.DATE,
     allowNull: false,
@@ -12,21 +12,21 @@ const SaleOrder = sequelize.define("SaleOrder", {
   numberInvoice: {
     type: DataTypes.INTEGER,
   },
+  services: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+    allowNull: false,
+  },
+  pictures: {
+    type: DataTypes.ARRAY(DataTypes.STRING),
+  },
+  tagline: {
+    type: DataTypes.STRING,
+  },
 });
 
-SaleOrder.belongsTo(Customer, {
+Invoice.belongsTo(Customer, {
   foreignKey: "customerId",
   as: "customer",
 });
 
-SaleOrder.belongsToMany(Services, {
-  through: "SaleOrderServices",
-  as: "services",
-  foreignKey: "saleOrderId",
-});
-
-Services.belongsToMany(SaleOrder, {
-  through: "SaleOrderServices",
-  as: "orders",
-  foreignKey: "servicesId",
-});
+module.exports = Invoice;
